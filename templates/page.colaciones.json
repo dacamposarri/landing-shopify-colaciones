@@ -1,0 +1,9 @@
+{
+  "sections": {
+    "main": {
+      "type": "colaciones-landing",
+      "settings": {}
+    }
+  },
+  "order": ["main"]
+}
