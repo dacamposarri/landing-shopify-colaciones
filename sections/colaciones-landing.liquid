@@ -1,7 +1,9 @@
 {% comment %}
   Landing Colaciones irresistibles — fotos ya pegadas desde Shopify CDN.
 {% endcomment %}
-{% if section.settings.product != blank %}
+{% if product != blank and product.selected_or_first_available_variant %}
+  {% assign buy = '/cart/' | append: product.selected_or_first_available_variant.id | append: ':1' %}
+{% elsif section.settings.product != blank %}
   {% assign buy = section.settings.product.url %}
 {% elsif section.settings.checkout_url != blank %}
   {% assign buy = section.settings.checkout_url %}
@@ -471,7 +473,7 @@
     }
   ],
   "enabled_on": {
-    "templates": ["page"]
+    "templates": ["product", "page"]
   },
   "presets": [
     {
