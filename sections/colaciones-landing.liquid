@@ -10,6 +10,18 @@
 {% else %}
   {% assign buy = '/cart/49310019977467:1' %}
 {% endif %}
+{% assign p_sale = section.settings.price_sale | default: '$10.990' %}
+{% assign p_list = section.settings.price_list | default: '$58.990' %}
+{% assign p_stack = section.settings.price_stack | default: '$84.990' %}
+{% assign p_save = section.settings.price_save | default: '$74.000' %}
+{% if product != blank %}
+  {% assign p_sale = product.price | money %}
+  {% if product.compare_at_price > product.price %}
+    {% assign p_list = product.compare_at_price | money %}
+  {% endif %}
+{% elsif section.settings.product != blank %}
+  {% assign p_sale = section.settings.product.price | money %}
+{% endif %}
 {% if section.settings.img_mockup != blank %}
   {% assign img_mockup = section.settings.img_mockup | image_url: width: 1600 %}
 {% else %}
@@ -35,10 +47,6 @@
 {% else %}
   {% assign img_chaos = 'chaos.jpg' | file_img_url: '1400x' %}
 {% endif %}
-{% assign p_sale = section.settings.price_sale | default: '$10.990' %}
-{% assign p_list = section.settings.price_list | default: '$58.990' %}
-{% assign p_stack = section.settings.price_stack | default: '$84.990' %}
-{% assign p_save = section.settings.price_save | default: '$74.000' %}
 
 <style>
   .clx { --bg:#f7f3ec; --warm:#efe6d8; --surf:#fffcf7; --ink:#1c1917; --muted:#57534e; --subtle:#78716c; --line:#e7e0d4; --pri:#17663a; --pri-fg:#f7f3ec; --pri-soft:#e8f4ec; --urg:#9f1239; --urg-soft:#ffe4e6; --inv:#f7f3ec; --navy:#1c2430; font-family:Figtree,system-ui,sans-serif; color:var(--ink); background:var(--bg); line-height:1.55; padding-bottom:96px; -webkit-font-smoothing:antialiased; }
